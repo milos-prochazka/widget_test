@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'CountriesField.dart';
 import 'SafeAreaExample.dart';
 import 'ExpandedExample.dart';
 import 'TableExample.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget
         '/screen2': (BuildContext context) => new SafeAreaExample(),
         '/screen3': (BuildContext context) => new ExpandedExample(),
         '/screen4': (BuildContext context) => new TableExample(),
+        '/screen5': (BuildContext context) => new CountriesField(),
       },
     );
   }
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget
 
 class Screen1 extends StatelessWidget
 {
-  const Screen1({Key? key}) : super(key: key);
+  //const Screen1({Key? key}) : super(key: key);
 
 //#if true
   @override
@@ -81,10 +83,26 @@ class Screen1 extends StatelessWidget
                           Navigator.of(context).pushNamed('/screen4');
                         },
                         child: Text("Table"))),
+                Padding(
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                        onPressed: () async
+                        {
+                          await _showMyDialog(context);
+                        },
+                        child: Text("Dialog"))),
+                Padding(
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                        onPressed: () async
+                        {
+                          Navigator.of(context).pushNamed('/screen5');
+                        },
+                        child: Text("Overlay"))),
               ],
             ))));
   }
-//#end if line:35
+//#end if line:38
 
 //#if false
   @override
@@ -111,8 +129,46 @@ class Screen1 extends StatelessWidget
       ),
     );
   }
-//#end if line:69
+//#end if line:90
 
+  Future<void> _showMyDialog(BuildContext context) async
+  {
+    return showDialog<void>
+    (
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context)
+      {
+        return AlertDialog
+        (
+          title: const Text('AlertDialog Title'),
+          content: SingleChildScrollView
+          (
+            child: ListBody
+            (
+              children: <Widget>
+              [
+                Text('This is a demo alert dialog.'),
+                Text('Would you like to approve of this message?'),
+                ElevatedButton(onPressed: () {}, child: const Text('Přidané tlačítko'))
+              ],
+            ),
+          ),
+          actions: <Widget>
+          [
+            TextButton
+            (
+              child: const Text('Approve'),
+              onPressed: ()
+              {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
 
 class Screen2 extends StatelessWidget
