@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'AnimatedBuilder.dart';
 import 'CountriesField.dart';
 import 'SafeAreaExample.dart';
 import 'ExpandedExample.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget
         '/screen3': (BuildContext context) => new ExpandedExample(),
         '/screen4': (BuildContext context) => new TableExample(),
         '/screen5': (BuildContext context) => new CountriesField(),
+        '/screen6': (BuildContext context) => new AnimatedBuilderExample(),
       },
     );
   }
@@ -40,8 +42,7 @@ class Screen1 extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
-    return Scaffold
-               (
+    return Scaffold(
         appBar: AppBar
         (
           title: Text
@@ -51,77 +52,83 @@ class Screen1 extends StatelessWidget
           centerTitle: true,
         ),
         body: DefaultTextStyle
-              (
+                       (
             style: Theme.of(context).textTheme.headline4!,
             child: SafeArea
-             (
-                child: Column
-            (
-              children: 
-              [
-                Padding(
-                    padding: EdgeInsets.all(10),
-                    child: ElevatedButton(
-                        onPressed: () 
-                        {
-                          Navigator.of(context).pushNamed('/screen2');
-                        },
-                        child: Text("SafeArea"))),
-                Padding(
-                    padding: EdgeInsets.all(10),
-                    child: ElevatedButton(
-                        onPressed: () 
-                        {
-                          Navigator.of(context).pushNamed('/screen3');
-                        },
-                        child: Text("Expanded"))),
-                Padding(
-                    padding: EdgeInsets.all(10),
-                    child: ElevatedButton(
-                        onPressed: () 
-                        {
-                          Navigator.of(context).pushNamed('/screen4');
-                        },
-                        child: Text("Table"))),
-                Padding(
-                    padding: EdgeInsets.all(10),
-                    child: ElevatedButton(
-                        onPressed: () async 
-                        {
-                          await _showMyDialog(context);
-                        },
-                        child: Text("Dialog"))),
-                Padding(
-                    padding: EdgeInsets.all(10),
-                    child: ElevatedButton(
-                        onPressed: () async 
-                        {
-                          Navigator.of(context).pushNamed('/screen5');
-                        },
-                        child: Text("Overlay"))),
-              ],
-            ))));
+                      (
+                child: Align
+                     (
+                    alignment: Alignment.center,
+                    child: Column
+                    (
+                      children: 
+                      [
+                        Padding(
+                            padding: EdgeInsets.all(10),
+                            child: ElevatedButton(
+                                onPressed: () 
+                                {
+                                  Navigator.of(context).pushNamed('/screen2');
+                                },
+                                child: Text("SafeArea"))),
+                        Padding(
+                            padding: EdgeInsets.all(10),
+                            child: ElevatedButton(
+                                onPressed: () 
+                                {
+                                  Navigator.of(context).pushNamed('/screen3');
+                                },
+                                child: Text("Expanded"))),
+                        Padding(
+                            padding: EdgeInsets.all(10),
+                            child: ElevatedButton(
+                                onPressed: () 
+                                {
+                                  Navigator.of(context).pushNamed('/screen4');
+                                },
+                                child: Text("Table"))),
+                        Padding(
+                            padding: EdgeInsets.all(10),
+                            child: ElevatedButton(
+                                onPressed: () async 
+                                {
+                                  await _showMyDialog(context);
+                                },
+                                child: Text("Dialog"))),
+                        Padding(
+                            padding: EdgeInsets.all(10),
+                            child: ElevatedButton(
+                                onPressed: () async 
+                                {
+                                  Navigator.of(context).pushNamed('/screen5');
+                                },
+                                child: Text("Overlay"))),
+                        Padding(
+                            padding: EdgeInsets.all(10),
+                            child: ElevatedButton(
+                                onPressed: () async 
+                                {
+                                  Navigator.of(context).pushNamed('/screen6');
+                                },
+                                child: Text("AnimationBuilder"))),
+                      ],
+                    )))));
   }
-//#end if line:38
+//#end if line:34
 
 //#if false
 //##  @override
-//##  Widget build(BuildContext context)
-//##  {
-//##    return DefaultTextStyle
-//##    (
+//##  Widget build(BuildContext context) {
+//##    return DefaultTextStyle(
 //##      style: Theme.of(context).textTheme.headline4!,
-//##      child: GestureDetector
-//##      (
-//##        onTap: ()
-//##        {
+//##      child: GestureDetector(
+//##        onTap: () {
 //##          // This moves from the personal info page to the credentials page,
 //##          // replacing this page with that one.
 //##          //Navigator.of(context).pushReplacementNamed('/screen2');
 //##          Navigator.of(context).pushNamed('/screen2', arguments: 'SCREEN II');
 //##        },
-//##        child: Container
-//##        (
+//##        child: Container(
 //##          color: Colors.lightBlue,
 //##          alignment: Alignment.center,
 //##          child: const Text('Screen 1'),
@@ -129,7 +136,7 @@ class Screen1 extends StatelessWidget
 //##      ),
 //##    );
 //##  }
-//#end if line:90
+//#end if line:89
 
   Future<void> _showMyDialog(BuildContext context) async 
   {
